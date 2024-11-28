@@ -1,6 +1,7 @@
+C++
 1 输入
 
-1.1 getline
+** 1.1 getline
 
 1.1.1 头文件
 #include <string>
@@ -14,5 +15,187 @@ getline(cin,str);
 cout<<str<<endl;
 
 输入：abcd bb
-输出：abcd bb
+输出：abcd bb **
+
+** 2 类
+
+2.1.1 public // 公共的行为或属性
+    private // 私密的行为或属性
+
+2.1.2 成员函数
+
+2.1.2.1 类定义时同时实现 例子
+class Point
+{
+    public:
+    void setPoint(int x, int y) // 实现setPoint函数
+    {
+        xPos = x;
+        yPos = y;
+    }
+ 
+    void printPoint() // 实现printPoint函数
+    {
+        cout<< "x = " << xPos << endl;
+        cout<< "y = " << yPos << endl;
+    }
+ 
+    private:
+       int xPos;
+       int yPos;
+};
+ 
+int main()
+{
+    Point M; // 用定义好的类创建一个对象 点M
+    M.setPoint(10, 20); // 设置 M点 的x,y值
+    M.printPoint(); // 输出 M点 的信息
+ 
+    return 0;
+}
+
+输出：
+x = 10 
+y = 20
+
+2.1.2.2 类外定义成员函数 例子
+class Point
+{
+    public:
+    void setPoint(int x, int y); // 在类内对成员函数进行声明
+    void printPoint();
+
+    private:
+    int xPos;
+    int yPos;
+};
+ 
+void Point::setPoint(int x, int y) // 通过作用域操作符 '::' 实现setPoint函数
+{
+    xPos = x;
+    yPos = y;
+}
+ 
+void Point::printPoint() // 实现printPoint函数
+{
+    cout<< "x = " << xPos << endl;
+    cout<< "y = " << yPos << endl;
+}
+ 
+int main()
+{
+    Point M; // 用定义好的类创建一个对象 点M
+    M.setPoint(10, 20); // 设置 M点 的x,y值
+    M.printPoint(); // 输出 M点 的信息
+ 
+    return 0;
+}
+
+2.1.3 类对象的定义
+#include <string>
+
+class A
+{
+private:
+    int n2;
+    int n1;
+ 
+public:
+    A() :n2(34), n1(n2+1) {} // 或A(int k1,int k2):n2(k2),n1(k1){}
+ 
+    void Print() 
+    {
+        cout << "n1:" << n1 << ", n2: " << n2 << endl;
+    }
+};
+ 
+int main()
+{
+    A a; // 或A a(23,76)
+    a.Print();
+    getchar();
+
+    return 0;
+}
+
+2.2 类数组
+#define MAXLEN 10
+
+class Array
+{
+	private:
+		int items[MAXLEN];
+
+	public:
+		Array()
+    {
+      memset(items,0,sizeof(items));
+		}
+		~Array()
+    {
+		} // 这个类没有用到堆区内存，析构函数什么都不做
+		
+    // 在函数中可以判断数组下标ii的合法性
+		int& operator[](int ii){return items[ii];} // 重载操作符[]，形参是数组下标，可以修改数组中的元素
+		const int& operator[](int ii)const
+    {
+    return items[ii];
+    } // 重载操作符[]，形参是数组下标，不可以修改数组中的元素		
+};
+
+int main()
+{
+	Array aa; // 创建模板类Array的对象
+	aa[0]=5;
+  aa[1]=8;
+  aa[2]=3;
+  aa[3]=2;
+  aa[4]=7;
+	for(int ii=0;ii<5;ii++)
+  {
+    cout<<"a["<<ii<<"]="<<aa[ii]<<endl;
+	}
+
+  return 0;
+}
+
+** 3 操作符
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
