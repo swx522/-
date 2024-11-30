@@ -16,6 +16,7 @@ cout<<str<<endl;
 输出：abcd bb **
 
 ** 2 类
+2.1 类基础知识
 2.1.1 public // 公共的行为或属性
     private // 私密的行为或属性
 
@@ -247,6 +248,128 @@ int main()
 
 	return 0;
 }
+
+2.4 this 例子
+class Box 
+{  
+public:  
+    double width;  
+    double height;  
+  
+    // 构造函数  
+    Box(double w, double h) : width(w), height(h) {}  
+  
+    // 成员函数，用于计算盒子的体积  
+    double getVolume() 
+		{  
+        return width * height;  
+    }  
+  
+    // 成员函数，使用 this 指针返回指向当前对象的指针  
+    Box* getBiggerBox(double extraWidth, double extraHeight) 
+		{  
+        this->width += extraWidth; // 使用 this 指针访问成员变量  
+        this->height += extraHeight;  
+
+        return this; // 返回当前对象的指针  
+    }  
+};  
+  
+int main() 
+{  
+    Box myBox(3.0, 4.0);  
+    cout << "Original Volume: " << myBox.getVolume() << std::endl;  
+  
+    // 使用 getBiggerBox 成员函数改变 myBox 的尺寸，并返回 myBox 的引用  
+    Box* biggerBox = myBox.getBiggerBox(1.0, 1.0);  
+  
+    // 输出改变后的体积  
+    cout << "Bigger Volume: " << biggerBox->getVolume() << std::endl;  
+  
+    return 0;  
+}
+
+2.5 类指针
+2.5.1 功能1 定义和初始化
+class MyClass 
+{
+public:
+    void display() 
+		{
+        cout << "Display function of MyClass" << endl;
+    }
+};
+ 
+int main() 
+{
+    MyClass obj;        // 创建类对象
+    MyClass* ptr = &obj; // 声明指向类对象的指针并初始化
+ 
+    // 通过指针访问对象的成员函数
+    ptr->display();     // 输出: Display function of MyClass
+ 
+    return 0;
+}
+
+2.5.2 功能2 通过指针访问类的成员
+class MyClass 
+{
+public:
+    int data;
+    void display()
+		{
+        cout << "Data: " << data << endl;
+    }
+};
+ 
+int main() 
+{
+    MyClass obj;
+    obj.data = 10;
+ 
+    MyClass* ptr = &obj; // 指向类对象的指针
+    cout << ptr->data << endl; // 访问成员变量，输出: 10
+    ptr->display();            // 访问成员函数，输出: Data: 10
+ 
+    return 0;
+}
+
+2.5.3 功能3 类的指针与多态性
+class Base 
+{
+public:
+    virtual void show()
+		{
+        cout << "Base class show function" << endl;
+    }
+};
+ 
+class Derived : public Base 
+{
+public:
+    void show() override 
+		{
+        cout << "Derived class show function" << endl;
+    }
+};
+ 
+int main() 
+{
+    Base* bptr; // 基类指针
+    Derived d;
+ 
+    bptr = &d; // 基类指针指向派生类对象
+    bptr->show(); // 调用的是派生类的 show() 函数，输出: Derived class show function
+ 
+    return 0;
+}
+
+2.6 override
+2.6.1 作用
+该函数必须重载其基类中的同名函数，否则代码将无法通过编译
+
+2.6.2 例子
+
 
 ** 3 操作符operator 例子
 class person
