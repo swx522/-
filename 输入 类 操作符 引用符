@@ -285,6 +285,45 @@ int main()
     
     return 0;
 }
+
+** 4 引用符& 
+4.1 替换符 例子
+int x = 666;
+int &y = x; 
+
+y = 666; // 此处对y赋值相当于对x赋值
+cout << "x : " << x << endl; // x为666
+
+4.2 函数返回值 例子
+int& func(int x)
+{
+	static int y = 600; // 这里的y变成了一个静态变量，存放在全局区
+  y += x;	
+ 
+	return y;
+}
+ 
+int main() 
+{	
+	int &a = func(66); // 这里a的替换符，本质上是替换func()函数的局部变量y 	
+	
+	func(55) = 777; // 这里相当于 a = 777，也就是y = 777
+ 
+  // cout << "y : " << y << endl; 这句话是错误的，因为我们无法在主函数访问func()的局部变量y
+  cout << "a : " << a << endl; 
+	 
+	return 0;
+}
+
+4.3 常量引用
+4.3.1 作用
+保护引用形参不被修改
+
+4.3.2 例子
+void func(const int &x) 
+{
+    ...
+}
  
 
 
