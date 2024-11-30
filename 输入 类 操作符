@@ -167,15 +167,15 @@ private:
 public:
     person(int nAge)
     {
-        this->age = nAge;
+      this->age = nAge;
     }
  
     bool operator==(const person& ps)
     {
-        if (this->age == ps.age)
-        {
-            return true;
-        }
+      if (this->age == ps.age)
+      {
+        return true;
+      }
         return false;
     }
 };
@@ -187,11 +187,11 @@ int main()
     
     if (p1 == p2)
     {
-        cout << "p1 is equal with p2." << endl;
+      cout << "p1 is equal with p2." << endl;
     }
     else
     {
-        cout << "p1 is not equal with p2." << endl;
+      cout << "p1 is not equal with p2." << endl;
     }
     
     return 0;
