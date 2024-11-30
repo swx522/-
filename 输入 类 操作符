@@ -1,8 +1,6 @@
 C++
 1 输入
-
 ** 1.1 getline
-
 1.1.1 头文件
 #include <string>
 
@@ -18,7 +16,6 @@ cout<<str<<endl;
 输出：abcd bb **
 
 ** 2 类
-
 2.1.1 public // 公共的行为或属性
     private // 私密的行为或属性
 
@@ -157,6 +154,98 @@ int main()
 	}
 
   return 0;
+}
+
+2.3 构造函数 析构函数 拷贝函数 
+2.3.1 析构函数
+2.3.1.1 作用
+清理对象
+
+2.3.1.2 例子
+class Person
+{
+public:
+	Person()
+	{
+		cout << "调用构造函数" << endl;
+	}
+	~Person() // 对象销毁前，自动调用
+	{
+		cout << "析构函数的调用" << endl;
+	}
+};
+
+void test()
+{
+	//创建对象
+	Person  p; // 这是一个局部变量，test执行完毕后会释放该对象 进而调用析构函数
+}
+
+int main()
+{
+	Person  p1; // 如果在main函数创建对象，析构函数会在按任意键后再调用
+	test();
+	system("pause");
+	return 0;
+}
+
+2.3.2 无参构造函数 有参构造函数 拷贝函数 例子
+class Person
+{
+public:
+	Person()
+	{
+		cout << "调用无参（默认）构造函数" << endl;
+	}
+	Person(int a)
+	{
+		age = a;
+		cout << "调用有参构造函数" << endl;
+	}
+	// 拷贝构造函数用于拷贝传入的类到自身类上 
+	// 除了拷贝构造函数外都是普通构造函数
+	Person(const Person& p) // 传入的类不希望被改变所以加const 传入引用用p指向该类
+	{
+		age = p.age;
+		cout << "调用拷贝构造函数" << endl;
+	}
+	~Person()
+	{
+		cout << "析构函数的调用" << endl;
+	}
+	int age;
+
+};
+void test()
+{
+	// 调用
+	// 1.括号法
+	// 注意：调用无参构造时不要输入()
+	// Person p();会被编译器认为是函数的声明
+	Person p; // 调用无参构造函数
+	Person p1(10); // 调用有参函数构造
+	Person p2(p1); // 调用拷贝构造函数
+	cout << "p1的年龄" << p1.age << endl;
+	cout << "p2的年龄" << p2.age << endl;
+
+	// 2.显式法
+	Person p3; // 调用无参构造函数
+	Person p4 = Person(10); // 调用有参函数构造
+	Person p5 = Person(p1); // 调用拷贝构造函数
+	// Person(10)为匿名对象 等号左侧就是它的名 
+	// 特点：当前行结束时，系统会立即回收掉匿名对象 即它的析构函数会在该行结束后就调用而不是test函数结束
+
+	//3.隐式转换法
+	Person p6 = 10; // 调用有参函数构造 相当于Person p6=Person(10);  假如有两个参数就是 Person p6 = (10,9);
+	Person p7 = p1; // 调用拷贝构造函数 相当于Person p7=Person(p1);
+}
+
+int main()
+{
+	test();
+	system("pause");
+
+	return 0;
 }
 
 ** 3 操作符operator 例子
